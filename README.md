@@ -2,6 +2,11 @@
 Hamrahpay Library for Basic4Android
 ## کتابخانه همراه پی برای بیسیک فور اندروید
 
+## ویدئو آموزشی
+
+[آپارات همراه پی](http://www.aparat.com/hamrahpay)
+
+
 کتابخانه های مورد نیاز در بیسیک فور اندروید :
 * HttpUtils2
 * JSON
@@ -9,10 +14,10 @@ Hamrahpay Library for Basic4Android
 * Phone
 * RandomAccessFile
 * Reflection
-* WebViewExtras2
+* WebViewExtras2     - [Download](http://b4a.martinpearman.co.uk/webviewextras/)
 
 پرمیژن مورد نیاز کتابخانه همراه پی :
-```
+```xml
 AddManifestText(<uses-permission android:name="android.permission.GET_ACCOUNTS" />)
 ```
 
