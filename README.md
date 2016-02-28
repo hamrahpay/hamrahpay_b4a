@@ -18,7 +18,7 @@ AddManifestText(<uses-permission android:name="android.permission.GET_ACCOUNTS" 
 
 ##کد نویسی دکمه پرداخت
 
-```javascript
+```basic
 Sub PayBtn_Click
   Dim product_sku As String
   product_sku = "hp_55202faf1ddd8901148214" ' این کد را به شناسه کالای خود تغییر دهید
