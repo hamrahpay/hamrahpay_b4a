@@ -1,0 +1,97 @@
+﻿Version=5.5
+NumberOfModules=3
+Module1=hamrahpay
+Module2=payment_activity
+Module3=StateManager
+Build1=Default,b4a.hamrahpay
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="14"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~SetApplicationAttribute(android:theme, "@android:style/Theme.Holo")~\n~AddManifestText(<uses-permission android:name="android.permission.GET_ACCOUNTS" />)~\n~~\n~'End of default text.~\n~
+IconFile=
+NumberOfFiles=1
+File1=paybtn.bal
+NumberOfLibraries=8
+Library1=core
+Library2=phone
+Library3=json
+Library4=reflection
+Library5=httputils2
+Library6=network
+Library7=webviewextras2
+Library8=randomaccessfile
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Hamrahpay B4A
+	#VersionCode: 2
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+' www.Hamrahpay
+' HamrahPay Official library for basic4android developers
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+	
+	Dim product_sku As String
+	'Change this code to your product sku code
+	' کد محصول خود را جایگزین کد زیر نمایید
+	product_sku = "hp_55202faf1ddd8901148214" 
+	
+	
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	'These variables can only be accessed from this module.
+	Private pay_btn As Button
+	
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	'Do not forget to load the layout file created with the visual designer. For example:
+	'Activity.LoadLayout("Layout1")
+	Activity.LoadLayout("paybtn")
+End Sub
+
+Sub Activity_Resume
+	
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+Sub Activity_Click
+	
+End Sub
+
+Sub pay_btn_Click
+	If hamrahpay.IsConnected=False Then
+		ToastMessageShow("دستگاه شما به اینترنت متصل نمیباشد . لطفا از صحت اتصال به اینترنت اطمینان حاصل فرمایید.",True)
+	Else
+		hamrahpay.pay_request(product_sku,Me)
+	End If
+		
+End Sub
+
+Sub	pay_status_Click
+	If hamrahpay.isPayed(product_sku)=True Then
+		ToastMessageShow("پرداخت انجام شده است",True)
+	Else
+		ToastMessageShow("پرداختی انجام نشده است",True)
+	End If
+End Sub
+
+Sub JobDone (Job As HttpJob)
+	hamrahpay.JobDone(Job)
+End Sub
+
+
+
+
+
