@@ -1,4 +1,4 @@
-﻿Type=Activity
+Type=Activity
 Version=5.5
 ModulesStructureVersion=1
 B4A=true
@@ -43,8 +43,8 @@ Sub Activity_Resume
 	sett.Initialize(browser)
 	sett.GetSettings.SetDOMStorageEnabled(True)
 	
-	'sett.SetWebViewClient(WebClient)
-	sett.SetWebChromeClient(WebChromeClient)
+	sett.SetWebViewClient(WebClient)
+	'sett.SetWebChromeClient(WebChromeClient)
 	
 	
    	Activity.AddView(sett, 0, 4%y, 100%x, 100%y)
@@ -65,39 +65,34 @@ Sub Activity_Pause (UserClosed As Boolean)
 	End If
 End Sub
 
+Sub WebClient_PageFinished (Url As String)
+	ProgressDialogHide
+	sett.Visible = False
+	sett.Visible=True
+End Sub
 
-Sub WebChromeClient_ProgressChanged(NewProgress As Int)
-	If NewProgress=100 Then
-		ProgressDialogHide
-		sett.Visible = False
-		sett.Visible=True
+Sub WebClient_OverrideUrl (Url As String) As Boolean
+	addressbar.Text = Url
+	If Url.ToLowerCase.Contains("exit_page") Then
+		Activity_Pause(True)
 	End If
 End Sub
 
-Sub browser_OverrideUrl (Url As String) As Boolean
+Sub WebClient_UpdateVisitedHistory(Url As String, IsReload As Boolean)
 	addressbar.Text = Url
-	browser.LoadUrl(Url)
-	
 	If (Url.ToLowerCase.Contains("shaparak.ir") And Url.ToLowerCase.StartsWith("https://")) Then
 		addressbar.Color=Colors.RGB(90,162,43)
-		addressbar.SetTextColorAnimated(0,Colors.RGB(255,255,255))
 	End If
 	
 	If Url.ToLowerCase.Contains("exit_page") Then
 		Activity_Pause(True)
 	End If
-	
-	If Url.ToLowerCase.Contains("exit_page") Then
-		Activity_Pause(True)
-	End If
-	
-	
-	Return True
 End Sub
 
 Sub WebClient_ReceivedSslError (SslErrorHandler1 As SslErrorHandler, SslError1 As SslError)
 	SslErrorHandler1.Proceed
 End Sub
+
 
 Sub JobDone (Job As HttpJob)
 	hamrahpay.JobDone(Job)
