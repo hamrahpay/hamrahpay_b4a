@@ -170,7 +170,7 @@ Sub pay_request(sku As String,m_activity As Object)
 	pay_request_url = "https://hamrahpay.com/rest-api/pay-request"
 	product_sku = sku
 	Dim post_param As String
-	post_param =  "sku="&sku&"&device_id="&GetDeviceId&"&email="&GetPrimaryEmail
+	post_param =  "sku="&sku&"&device_id="&GetDeviceId&"&email="&GetPrimaryEmail&"&verification_type="&verification_type
 	HttpUtils.Initialize("Pay_Request",parent_activity)
 	HttpUtils.PostString(pay_request_url, post_param)
 	
