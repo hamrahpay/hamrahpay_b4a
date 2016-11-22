@@ -89,9 +89,9 @@ Sub WebClient_UpdateVisitedHistory(Url As String, IsReload As Boolean)
 	End If
 End Sub
 
-Sub WebClient_ReceivedSslError (SslErrorHandler1 As SslErrorHandler, SslError1 As SslError)
-	SslErrorHandler1.Proceed
-End Sub
+'Sub WebClient_ReceivedSslError (SslErrorHandler1 As SslErrorHandler, SslError1 As SslError)
+'	SslErrorHandler1.Proceed
+'End Sub
 
 
 Sub JobDone (Job As HttpJob)
