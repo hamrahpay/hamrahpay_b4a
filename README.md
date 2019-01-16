@@ -21,7 +21,7 @@ Hamrahpay Library for Basic4Android
 AddManifestText(<uses-permission android:name="android.permission.READ_PHONE_STATE" />)
 ```
 
-##کد نویسی دکمه پرداخت
+## کد نویسی دکمه پرداخت
 
 ```basic
 Sub Process_Globals
