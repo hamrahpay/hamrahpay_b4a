@@ -4,7 +4,7 @@ Hamrahpay Library for Basic4Android
 
 ## ویدئو آموزشی
 
-[آپارات همراه پی](http://www.aparat.com/hamrahpay)
+[آپارات همراه پی](https://www.aparat.com/v/TBxuV)
 
 
 کتابخانه های مورد نیاز در بیسیک فور اندروید :
