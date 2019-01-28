@@ -186,7 +186,7 @@ Sub verify_payment(pay_code_param As String,sku As String)
 	
 	pay_verify_url = "https://hamrahpay.com/rest-api/verify-payment"
 	HttpUtils.Initialize("Pay_Verify",parent_activity)
-	HttpUtils.PostString(pay_verify_url, "pay_code="&pay_code_param&"&sku="&sku&"&device_model="&device_model&"&device_manufacturer="&device_manufacturer&"&sdk_version="&sdk_version)
+	HttpUtils.PostString(pay_verify_url, "pay_code="&pay_code_param&"&sku="&sku&"&device_model="&device_model&"&device_manufacturer="&device_manufacturer&"&sdk_version="&sdk_version&"&library_version="&lib_vers&"&library_name="&lib_name&"&package_id="&package_name)
 	'ProgressDialogShow2("در حال بررسی تراکنش...",False)
 End Sub
 '---------------------------------------------------------
