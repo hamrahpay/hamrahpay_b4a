@@ -164,7 +164,7 @@ Sub pay_request(sku As String,m_activity As Object)
 		Dim post_param As String
 		Dim package_name As String
 		package_name = Application.PackageName
-		post_param =  "sku="&sku&"&device_id="&GetDeviceId&"&verification_type="&verification_type&"library_version="&lib_vers&"library_name="&lib_name&"package_id="&package_name
+		post_param =  "sku="&sku&"&device_id="&GetDeviceId&"&verification_type="&verification_type&"&library_version="&lib_vers&"&library_name="&lib_name&"&package_id="&package_name
 		HttpUtils.Initialize("Pay_Request",parent_activity)
 		HttpUtils.PostString(pay_request_url, post_param)
 	
