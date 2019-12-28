@@ -181,7 +181,7 @@ End Sub
 
 ### پشتیبانی 
 
-[![hamrahpay](https://hamrahpay.com/assets/home/theme/img/logo-red.png)] (https://hamrahpay.com)
+[![hamrahpay](https://hamrahpay.com/assets/home/theme/img/logo-red.png)](https://hamrahpay.com)
 
 
  هرگونه سوالی در رابطه با این کتابخانه را از بخش تیکت ها در پنل خود در سایت ما مطرح نمایید.
