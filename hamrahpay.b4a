@@ -1,8 +1,6 @@
 ﻿Build1=Default,b4a.hamrahpay
-File1=pay_activity.bal
-File2=paybtn.bal
+File1=paybtn.bal
 FileGroup1=Default Group
-FileGroup2=Default Group
 Group=Default Group
 IconFile=
 Library1=core
@@ -11,47 +9,42 @@ Library3=json
 Library4=reflection
 Library5=okhttputils2
 Library6=network
-Library7=webviewextras2
-Library8=randomaccessfile
-Library9=runtimepermissions
-ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="26"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~SetApplicationAttribute(android:theme, "@android:style/Theme.Holo")~\n~~\n~'End of default text.~\n~
-Module1=hamrahpay
+Library7=randomaccessfile
+Library8=runtimepermissions
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.basic4ppc.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="26"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~SetApplicationAttribute(android:theme, "@android:style/Theme.Holo")~\n~'End of default text.~\n~~\n~AddActivityText(Main,~\n~<intent-filter>~\n~    <action android:name="android.intent.action.VIEW"/>~\n~    <category android:name="android.intent.category.DEFAULT"/>~\n~    <category android:name="android.intent.category.BROWSABLE"/>~\n~    <data android:host="your_b4a_app_unique_id" android:scheme="hamrahpay"/>~\n~</intent-filter> ~\n~)~\n~
+Module1=Hamrahpay
 Module2=LastPurchaseInfo
 Module3=Lastpurachase
-Module4=payment_activity
-Module5=StateManager
-NumberOfFiles=2
-NumberOfLibraries=9
-NumberOfModules=5
+Module4=StateManager
+NumberOfFiles=1
+NumberOfLibraries=8
+NumberOfModules=4
 Version=8
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: Hamrahpay B4A
-	#VersionCode: 2
-	#VersionName: 
+	#VersionCode: 3
+	#VersionName: 3
 	'SupportedOrientations possible values: unspecified, landscape or portrait.
 	#SupportedOrientations: unspecified
 	#CanInstallToExternalStorage: False
 #End Region
 
+' www.Hamrahpay
+' HamrahPay Official library for basic4android developers
+
 #Region  Activity Attributes 
 	#FullScreen: False
 	#IncludeTitle: True
 #End Region
-' www.Hamrahpay
-' HamrahPay Official library for basic4android developers
+
 Sub Process_Globals
-	'These global variables will be declared once when the application starts.
-	'These variables can be accessed from all modules.
-	Dim product_sku As String
-	Private rp As RuntimePermissions
+	Dim HP As Hamrahpay
 End Sub
 
 Sub Globals
-	'These global variables will be redeclared each time the activity is created.
-	'These variables can only be accessed from this module.
-	
-	
+	Dim product_sku As String
+	Private rp As RuntimePermissions
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
@@ -61,7 +54,8 @@ Sub Activity_Create(FirstTime As Boolean)
 End Sub
 
 Sub Activity_Resume
-	
+	If Not(HP.IsInitialized) Then HP.Initialize("your_b4a_app_unique_id",Me)
+	HP.HamrahPayVerification(Activity.GetStartingIntent)
 End Sub
 
 Sub Activity_Pause (UserClosed As Boolean)
@@ -76,7 +70,7 @@ Sub pay_btn_Click
 	'------------------- begin of payment codes ----------------------------
 	If rp.Check(rp.PERMISSION_READ_PHONE_STATE)=True Then
 		product_sku="hp_55202faf1ddd8901148214" ' کد محصول خود را جایگزین نمایید
-		hamrahpay.pay_request(product_sku,Me)
+		HP.pay_request(product_sku)
 	Else
 		rp.CheckAndRequest(rp.PERMISSION_READ_PHONE_STATE)
 	End If
@@ -84,44 +78,51 @@ Sub pay_btn_Click
 End Sub
 
 Sub	pay_status_Click
-	If hamrahpay.isPayed(product_sku)=True Then
+	If HP.isPayed(product_sku)=True Then
 		ToastMessageShow("پرداخت انجام شده است",True)
 	Else
 		ToastMessageShow("پرداختی انجام نشده است",True)
 	End If
 End Sub
-
-Sub lastpurchase_btn_Click
-	product_sku="hp_55202faf1ddd8901148214" ' کد محصول خود را جایگزین نمایید
-	hamrahpay.RetriveLastPurchaseInfo(product_sku,Me)
+'------------------------------------------------------------------------------
+Sub	onPaymentSucceed(paycode As String,sku As String)
+	
+	'کد های فعال سازی برنامه خود را در این قسمت بنویسید
+	' write your activate code here
+	HP.MakePayed(product_sku)
+	ToastMessageShow("نرم افزار شما به نسخه طلایی ارتقاع پیدا کرد." & product_sku,True)
 End Sub
-
+'-----------------------------------------------------------------------
 ' -------------------Permission request result ---------------------------
 Sub Activity_PermissionResult (Permission As String, Result As Boolean)
 	If Permission = rp.PERMISSION_READ_PHONE_STATE And Result=True Then
-		hamrahpay.pay_request(product_sku,Me)
+		HP.pay_request(product_sku)
 	Else if Permission=rp.PERMISSION_READ_PHONE_STATE And Result=False Then
-		ToastMessageShow("لطفا برای ادامه ی کار سطح دسترسی لازم را به برنامه بدهید",True)
+		ToastMessageShow("لطفا برای ادامه ی روند پرداخت سطح دسترسی لازم را به برنامه بدهید",True)
 	End If
+End Sub
+'-------------------------------------------------------------------------
+Sub lastpurchase_btn_Click
+	product_sku="hp_55202faf1ddd8901148214" ' کد محصول خود را جایگزین نمایید
+	HP.RetriveLastPurchaseInfo(product_sku)
 End Sub
 ' ---------------------Last Purchase data -------------------------------
 ' در صورتی که بخواهید از پرداخت اشتراکی استفاده نمایید اطلاعات آخرین خرید مشتری در این متد آورده میشود
-Sub LastPurchaseData(lastPurchase As LastPurchaseInfo)
+' ----------------------------------------------------------------------
+Sub	onGetLastPurchaseInfoSucceed(lastPurchase As LastPurchaseInfo)
 	If lastPurchase.error=False Then
-		Dim daysAgo As Int =  lastPurchase.DaysAgo
-		Dim purchaseDate As String = lastPurchase.date
-		Dim current_date As String =lastPurchase.CurrentDate
-		Dim purchaseUnixTimeStamp As String = lastPurchase.unixTimestamp
-		Dim reserve_id As String = lastPurchase.ReserveID
+		Dim daysAgo As Int =  lastPurchase.DaysAgo ' number of days ago of last purchase
+		Dim purchaseDate As String = lastPurchase.date ' last purchase date
+		Dim current_date As String =lastPurchase.CurrentDate ' current date
+		Dim purchaseUnixTimeStamp As String = lastPurchase.unixTimestamp ' current date in unix timestamp format
+		Dim reserve_id As String = lastPurchase.ReserveID ' reserve id of last purchase
 		ToastMessageShow("Days Ago: "&daysAgo&" Reserve ID: "&reserve_id,True)
-		Else
+	Else
 		ToastMessageShow(lastPurchase.message,True)
 	End If
 End Sub
-' ----------------------------------------------------------------------
+
 Sub JobDone (Job As HttpJob)
-	hamrahpay.JobDone(Job)
-	If Job.Success And Job.JobName="Last_Purchase" Then
-		LastPurchaseData(hamrahpay.getlastPurchase())
-	End If
+	HP.JobDone(Job)
 End Sub
+
