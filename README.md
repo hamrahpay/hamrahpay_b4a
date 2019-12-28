@@ -64,7 +64,7 @@ YOUR_ACTIVITY را با نام اکتیویتی خود جایگزین نمایی
 ## کد نویسی دکمه پرداخت  
 در اکتیویتی که دکمه پرداخت وجود دارد توابع زیر را اضافه نمایید
 
-```basic
+```VBA
 Sub Process_Globals
 	Dim HP As Hamrahpay
 End Sub
@@ -95,7 +95,7 @@ End Sub
 حال توابع مورد نیاز برای پرداخت را بررسی میکنیم
 </p>
 
-```basic
+```VBA
 Sub pay_btn_Click ' کد های دکمه پرداخت
 	'------------------- begin of payment codes ----------------------------
 	If rp.Check(rp.PERMISSION_READ_PHONE_STATE)=True Then
@@ -150,7 +150,7 @@ End Sub
 از قطعه کد زیر میتوانید این اطلاعات را به دست آورید
 </p>
 
-```basic
+```VBA
 ' کد دکمه دریافت اطلاعات
 Sub lastpurchase_btn_Click
 	product_sku="hp_55202faf1ddd8901148214" ' کد محصول خود را جایگزین نمایید
