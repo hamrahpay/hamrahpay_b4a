@@ -91,7 +91,8 @@ End Sub
 <p dir='rtl' align='right'>
 فراموش نکنید که your_b4a_app_unique_id را دقیقا مانند عبارت انتخاب شده ی بالا برای این برنامه وارد نمایید . در صورتی که این مقدار مانند مقدار بالا نباشد و یا در برنامه های شما تکراری باشد عملیات پرداخت موفق نخواهد بود.
 (این مقدار باید در هر برنامه یکتا باشد)
-
+</p>
+<p dir='rtl' align='right'>
 حال توابع مورد نیاز برای پرداخت را بررسی میکنیم
 </p>
 
@@ -124,17 +125,17 @@ Sub Activity_PermissionResult (Permission As String, Result As Boolean)
 	End If
 End Sub
 ```
-* onPaymentSucceed
+* **onPaymentSucceed**
 <p dir='rtl' align='right'>
 این تابع زمانی Call میشود که پرداخت موفقیت آمیز بوده است . شما در این بخش میتوانید کدهای فعال سازی را نوشته و یا هر عملیاتی که بعد از پرداخت موفق باید انحاام شود
 </p>
 
-* Activity_PermissionResult
+* **Activity_PermissionResult**
 <p dir='rtl' align='right'>
 زمانی که کاربر دسترسی لازم را به کتابخانه بدهد این تابع Call میشود
 </p>
 
-* HP.pay_request
+* **HP.pay_request**
 <p dir='rtl' align='right'>
 عملیات پرداخت را برای یک شناسه کالا شروع میکند
 </p>
@@ -172,7 +173,7 @@ Sub	onGetLastPurchaseInfoSucceed(lastPurchase As LastPurchaseInfo)
 	End If
 End Sub
 ```
-* onGetLastPurchaseInfoSucceed
+* **onGetLastPurchaseInfoSucceed**
 <p dir='rtl' align='right'>
 زمانی که شما دکمه درخواست دریافت اطلاعات آخرین پرداخت برای یک شناسه کالا را میزنید درخواست به همراه پی ارسال میشود و زمانی که پاسخ دریافت شد این تابع Call  میشود 
 در این تابع میتوانید تصمیم بگیرید که کاربر مجددا پرداخت کند یا خیر
