@@ -1,4 +1,4 @@
-# hamrahpay_b4a  Hamrahpay Library for Basic4Android
+# Hamrahpay Library for Basic4Android (Payment in Browser)
 ## کتابخانه همراه پی برای بیسیک فور اندروید  (کتابخانه پیشنهادی)
 ## ویدئو آموزشی  
 [آپارات همراه پی](https://www.aparat.com/v/TBxuV)
